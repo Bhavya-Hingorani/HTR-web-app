@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import React, {useState } from "react";
+import { Button } from 'react-bootstrap'
 import './App.css';
 
+var file = null;
+
 function App() {
+  const [selectedFile, fileUploadHandler] = useState(null);
+  function fileSelectedHandler(event) {
+    console.log(selectedFile);
+    file = event.target.files[0];
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className='primary'>Welcome</h1>
+      <input type='file' onChange={fileSelectedHandler} />
+      <Button className='button'  onClick={() => fileUploadHandler(file)}> Upload file</Button>
+      {/* <Button
+        title="Press me"
+        onPress={fileUploadHandler(file)}
+      /> */}
     </div>
   );
 }
